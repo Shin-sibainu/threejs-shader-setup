@@ -13,19 +13,34 @@ module.exports = {
   },
   module: {
     rules: [
+      // HTML
       {
-        // .jsの場合
+        test: /\.(html)$/,
+        use: ["html-loader"],
+      },
+      //Javascript
+      {
         test: /\.js$/,
         // node_modulesは対象外
         exclude: /node_modules/,
         //トランスコンパイラ
-        use: "babel-loader",
+        use: ["babel-loader"],
       },
+      //Images
       {
-        //拡張子が.glsl .vert .fragの場合
-        test: /\.(glsl|vert|frag)$/,
-        use: "shader-loader",
-        // type: "asset/source",
+        test: /\.(jpg|png|gif|svg)$/,
+        type: "asset/resource",
+        generator: {
+          filename: "assets/images/[hash][ext]",
+        },
+      },
+      //Shader
+      {
+        test: /\.(glsl|vs|fs|vert|frag)$/,
+        type: "asset/source",
+        generator: {
+          filename: "assets/images/[hash][ext]",
+        },
       },
     ],
   },
