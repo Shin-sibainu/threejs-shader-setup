@@ -1,8 +1,6 @@
+import "./style.css";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-
-// デバッグ
-// const gui = new dat.GUI();
 
 /**
  * Sizes
@@ -34,15 +32,12 @@ const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
 window.addEventListener("resize", () => {
-  // Update sizes
   sizes.width = window.innerWidth;
   sizes.height = window.innerHeight;
 
-  // Update camera
   camera.aspect = sizes.width / sizes.height;
   camera.updateProjectionMatrix();
 
-  // Update renderer
   renderer.setSize(sizes.width, sizes.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
@@ -76,12 +71,11 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 const clock = new THREE.Clock();
 
 const animate = () => {
+  //時間取得
   const elapsedTime = clock.getElapsedTime();
 
-  // Update controls
   controls.update();
 
-  // Render
   renderer.render(scene, camera);
 
   window.requestAnimationFrame(animate);
